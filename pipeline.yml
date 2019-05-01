@@ -40,6 +40,7 @@ jobs:
       terraform_source: git/tf/ci
       vars:
         creds_json: {{gcp_credentials_json}}
+        name: {{name}}
 - name: setup-project
   plan:
   - get: git

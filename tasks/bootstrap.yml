@@ -15,5 +15,5 @@ run:
   path: gcp-bootstrap/tasks/bootstrap.sh
 
 params:
-  TF_VAR_gcp_creds: {{gcp_credentials_json}}
-  TF_VAR_project_id: {{project_id}}
+  TF_VAR_gcp_creds:
+  TF_VAR_project_id:

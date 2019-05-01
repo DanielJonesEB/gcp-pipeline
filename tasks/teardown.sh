@@ -7,6 +7,7 @@ pushd gcp-bootstrap/tf/ci
 
   terraform destroy \
     -auto-approve \
-    -input=false
+    -input=false \
+    -state=../../../tfstate/terraform.tfstate
 popd
 

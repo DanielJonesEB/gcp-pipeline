@@ -19,8 +19,6 @@ resources:
     backend_type: local
     backend_config:
       path: foo
-    env:
-      CREDENTIALS_JSON: {{gcp_credentials_json}}
 - name: terraform
   type: terraform
   source:
@@ -40,6 +38,8 @@ jobs:
     params:
       env_name: prod
       terraform_source: git/tf/ci
+      vars:
+        creds_json: {{gcp_credentials_json}}
 - name: setup-project
   plan:
   - get: git

@@ -8,8 +8,9 @@ image_resource:
 
 inputs:
 - name: gcp-bootstrap
-outputs:
 - name: tfstate
+outputs:
+- name: tfstate-out
 
 run:
   path: gcp-bootstrap/tasks/bootstrap.sh

@@ -8,6 +8,7 @@ pushd gcp-bootstrap/tf/ci
   terraform apply \
     -auto-approve \
     -input=false \
-    -state-out=../../../tfstate/terraform.tfstate
+    -state=../../../tfstate/terraform.tfstate \
+    -state-out=../../../tfstate-out/terraform.tfstate
 popd
 

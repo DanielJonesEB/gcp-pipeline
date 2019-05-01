@@ -3,7 +3,8 @@ resource_types:
   - name: gcs-resource
     type: docker-image
     source:
-      repository: frodenas/gcs-resource
+      repository: danieljoneseb/gcs-resource-with-default
+
 
 resources:
 - name: git
@@ -17,12 +18,14 @@ resources:
     bucket: {{project_id}}
     json_key: {{gcp_credentials_json}}
     versioned_file: ci/terraform.tfstate
+    default_content: ""
 
 jobs:
 - name: setup-ci
   plan:
   - get: git
     trigger: true
+  - get: tfstate
   - task: bootstrap-terraform
     file: git/tasks/bootstrap.yml
     input_mapping:
@@ -32,7 +35,7 @@ jobs:
       TF_VAR_project_id: {{project_id}}
   - put: tfstate
     params:
-      file: tfstate/terraform.tfstate
+      file: tfstate-out/terraform.tfstate
 
 - name: teardown-ci
   plan:

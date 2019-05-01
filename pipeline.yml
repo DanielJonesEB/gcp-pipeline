@@ -34,3 +34,15 @@ jobs:
   - put: tfstate
     params:
       file: tfstate/terraform.tfstate
+
+- name: teardown-ci
+  plan:
+  - get: git
+  - put: tfstate
+  - task: bootstrap-terraform
+    file: git/tasks/teardown.yml
+    input_mapping:
+      gcp-bootstrap: git
+    params:
+      TF_VAR_gcp_creds: {{gcp_credentials_json}}
+      TF_VAR_project_id: {{project_id}}

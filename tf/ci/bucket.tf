@@ -10,7 +10,7 @@ data "google_organization" "org" {
 
 data "google_active_folder" "spikes" {
   display_name = "spikes"
-  parent       = "${data.google_organization.org.name}"
+  parent       = "organizations/${data.google_organization.org.name}"
 }
 
 resource "google_project" "my_project" {

@@ -1,6 +1,4 @@
-variable "CREDENTIALS_JSON" {
-  type        = string
-}
+variable "CREDENTIALS_JSON" {}
 
 provider "google" {
   credentials = "${var.CREDENTIALS_JSON}"

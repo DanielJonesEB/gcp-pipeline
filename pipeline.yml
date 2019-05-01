@@ -1,0 +1,34 @@
+---
+resource_types:
+- name: terraform
+  type: docker-image
+  source:
+    repository: ljfranklin/terraform-resource
+    tag: latest
+
+resources:
+- name: git
+  type: git
+  source:
+    uri: https://github.com/DanielJonesEB/gcp-pipeline.git
+    branch: master
+
+- name: project
+  type: terraform
+  source:
+    backend_type: gcs
+    backend_config:
+      bucket: djtest
+      prefix: project
+      region: us-central1
+      credentials: {{gcp_credentials_json}}
+
+jobs:
+- name: setup-project
+  plan:
+  - get: git
+    trigger: true
+  - put: project
+    params:
+      env_name: prod
+      terraform_source: git/tf/admin

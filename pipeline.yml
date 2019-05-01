@@ -13,13 +13,21 @@ resources:
     uri: https://github.com/DanielJonesEB/gcp-pipeline.git
     branch: master
 
+- name: bootstrap-terraform
+  type: terraform
+  source:
+    backend_type: local
+    backend_config:
+      path: foo
+    env:
+      CREDENTIALS_JSON: {{gcp_credentials_json}}
 - name: terraform
   type: terraform
   source:
     backend_type: gcs
     backend_config:
       bucket: dj190501-a
-      prefix: project
+      prefix: terraform/state
       region: EU
       credentials: {{gcp_credentials_json}}
 
@@ -28,7 +36,7 @@ jobs:
   plan:
   - get: git
     trigger: true
-  - put: terraform
+  - put: bootstrap-terraform
     params:
       env_name: prod
       terraform_source: git/tf/ci

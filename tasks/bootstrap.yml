@@ -1,0 +1,19 @@
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: ljfranklin/terraform-resource
+    tag: 0.11.13
+
+inputs:
+- name: gcp-bootstrap
+outputs:
+- name: tfstate
+
+run:
+  path: gcp-bootstrap/tasks/bootstrap.sh
+
+params:
+  TF_VAR_gcp_creds:
+  TF_VAR_project_id:

@@ -1,5 +1,5 @@
-variable "creds_json" {}
-variable "name" {}
+variable "gcp_creds" {}
+variable "project_id" {}
 
 provider "google" {
   credentials = "${var.creds_json}"
@@ -21,13 +21,13 @@ data "google_active_folder" "spikes" {
 
 resource "google_project" "my_project" {
   name            = "GCP Spike"
-  project_id      = "${var.name}"
+  project_id      = "${var.project_id}"
   folder_id       = "${data.google_active_folder.spikes.name}"
   billing_account = "${data.google_billing_account.acct.id}"
 }
 
 resource "google_storage_bucket" "ci" {
-  name     = "${var.name}"
+  name     = "${var.project_id}-ci"
   location = "EU"
   project  = "${google_project.my_project.project_id}"
 

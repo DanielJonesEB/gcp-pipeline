@@ -33,4 +33,7 @@ gcloud organizations add-iam-policy-binding ${ORG_ID} \
   --role roles/billing.user
 gcloud organizations add-iam-policy-binding ${ORG_ID} \
   --member serviceAccount:terraform@${PROJECT_ID}.iam.gserviceaccount.com \
+  --role roles/billing.viewer
+gcloud organizations add-iam-policy-binding ${ORG_ID} \
+  --member serviceAccount:terraform@${PROJECT_ID}.iam.gserviceaccount.com \
   --role roles/resourcemanager.folderViewer

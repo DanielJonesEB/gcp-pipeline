@@ -2,7 +2,7 @@ variable "gcp_creds" {}
 variable "project_id" {}
 
 provider "google" {
-  credentials = "${var.creds_json}"
+  credentials = "${var.gcp_creds}"
 }
 
 data "google_organization" "org" {
@@ -27,7 +27,7 @@ resource "google_project" "my_project" {
 }
 
 resource "google_storage_bucket" "ci" {
-  name     = "${var.project_id}-ci"
+  name     = "${var.project_id}"
   location = "EU"
   project  = "${google_project.my_project.project_id}"
 

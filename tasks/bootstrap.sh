@@ -2,7 +2,12 @@
 
 set -euxo pipefail
 
-terraform apply \
-  -auto-approve \
-  -input=false \
-  -state-out=../tfstate/terraform.tfstate
+pushd gcp-bootstrap/tf/ci
+  terraform init
+
+  terraform apply \
+    -auto-approve \
+    -input=false \
+    -state-out=../tfstate/terraform.tfstate
+popd
+

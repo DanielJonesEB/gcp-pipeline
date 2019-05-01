@@ -1,10 +1,10 @@
 ---
 resource_types:
-- name: terraform
-  type: docker-image
-  source:
-    repository: ljfranklin/terraform-resource
-    tag: latest
+  - name: gcs-resource
+    type: docker-image
+    source:
+      repository: frodenas/gcs-resource
+
 
 resources:
 - name: git
@@ -12,6 +12,12 @@ resources:
   source:
     uri: https://github.com/DanielJonesEB/gcp-pipeline.git
     branch: master
+- name: tfstate
+  type: gcs-resource
+  source:
+    bucket: {{project_id}}
+    json_key: {{gcp_credentials_json}}
+    versioned_file: ci/terraform.tfstate
 
 jobs:
 - name: setup-ci
@@ -20,6 +26,11 @@ jobs:
     trigger: true
   - task: bootstrap-terraform
     file: git/tasks/bootstrap.yml
+    input_mapping:
+      gcp-bootstrap: git
     params:
       TF_VAR_creds_json: {{gcp_credentials_json}}
       TF_VAR_project_id: {{project_id}}
+  - put: tfstate
+    params:
+      file: tfstate/terraform.tfstate

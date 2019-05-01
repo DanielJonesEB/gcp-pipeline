@@ -27,9 +27,10 @@ resource "google_project" "my_project" {
 }
 
 resource "google_storage_bucket" "ci" {
-  name     = "${var.project_id}"
-  location = "EU"
-  project  = "${google_project.my_project.project_id}"
+  name          = "${var.project_id}"
+  location      = "EU"
+  project       = "${google_project.my_project.project_id}"
+  force_destroy = true
 
   versioning {
     enabled = true

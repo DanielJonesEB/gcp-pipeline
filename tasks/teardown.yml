@@ -8,6 +8,7 @@ image_resource:
 
 inputs:
 - name: gcp-bootstrap
+- name: tfstate
 
 run:
   path: gcp-bootstrap/tasks/teardown.sh

@@ -37,7 +37,7 @@ jobs:
 - name: teardown-ci
   plan:
   - get: git
-  - put: tfstate
+  - get: tfstate
   - task: bootstrap-terraform
     file: git/tasks/teardown.yml
     input_mapping:

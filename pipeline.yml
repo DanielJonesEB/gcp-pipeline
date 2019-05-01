@@ -13,22 +13,31 @@ resources:
     uri: https://github.com/DanielJonesEB/gcp-pipeline.git
     branch: master
 
-- name: project
+- name: terraform
   type: terraform
   source:
     backend_type: gcs
     backend_config:
       bucket: dj190501-a
       prefix: project
-      region: us-central1
+      region: EU
       credentials: {{gcp_credentials_json}}
 
 jobs:
+- name: setup-ci
+  plan:
+  - get: git
+    trigger: true
+  - put: terraform
+    params:
+      env_name: prod
+      terraform_source: git/tf/ci
 - name: setup-project
   plan:
   - get: git
     trigger: true
-  - put: project
+    passed: [setup-ci]
+  - put: terraform
     params:
       env_name: prod
       terraform_source: git/tf/admin

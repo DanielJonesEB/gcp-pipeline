@@ -5,7 +5,6 @@ resource_types:
     source:
       repository: frodenas/gcs-resource
 
-
 resources:
 - name: git
   type: git

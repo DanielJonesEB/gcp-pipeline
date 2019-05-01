@@ -2,8 +2,6 @@
 
 set -euxo pipefail
 
-
-
 pushd gcp-bootstrap/tf/ci
   terraform init
 

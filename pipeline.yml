@@ -18,7 +18,7 @@ resources:
   source:
     backend_type: gcs
     backend_config:
-      bucket: djtest
+      bucket: dj190501-a
       prefix: project
       region: us-central1
       credentials: {{gcp_credentials_json}}

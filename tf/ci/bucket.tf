@@ -1,5 +1,9 @@
+variable "CREDENTIALS_JSON" {
+  type        = string
+}
+
 provider "google" {
-  credentials = "${CREDENTIALS_JSON}"
+  credentials = "${var.CREDENTIALS_JSON}"
 }
 
 resource "google_storage_bucket" "ci" {

@@ -22,7 +22,7 @@ resource "google_project" "my_project" {
 resource "google_storage_bucket" "ci" {
   name     = "dj190501-a"
   location = "EU"
-  project  = "${data.google_project.my_project.name}"
+  project  = "${google_project.my_project.project_id}"
 
   versioning {
     enabled = true

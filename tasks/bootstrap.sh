@@ -13,7 +13,7 @@ set -euxo pipefail
 echo "${GCP_CREDENTIALS_JSON}" > creds.json
 gcloud auth activate-service-account --key-file creds.json
 
-matching_project="$(gcloud projects list --format json | jq '.[] | select(.projectId=="${PROJECT_ID)") | .projectId')"
+matching_project="$(gcloud projects list --format json | jq '.[] | select(.projectId=="${PROJECT_ID})") | .projectId')"
 
 if [[ $matching_project == *"${PROJECT_ID}"* ]]; then
   buckets="$(gsutil ls -p "${PROJECT_ID}")"
@@ -37,7 +37,6 @@ fi
 
 pushd gcp-bootstrap/tf/ci
   terraform init
-
 
   TF_VAR_billing_account_id="${BILLING_ACCOUNT_ID}" \
     TF_VAR_bucket_location="${BUCKET_LOCATION}" \

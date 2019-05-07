@@ -31,6 +31,7 @@ jobs:
     params:
       TF_VAR_gcp_creds: {{gcp_credentials_json}}
       TF_VAR_project_id: {{project_id}}
+      PROJECT_ID: {{project_id}}
   - put: tfstate
     params:
       file: tfstate-out/terraform.tfstate

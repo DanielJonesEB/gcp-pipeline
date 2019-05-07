@@ -17,7 +17,6 @@ resources:
     bucket: {{project_id}}
     json_key: {{gcp_credentials_json}}
     versioned_file: ci/terraform.tfstate
-    default_content: ""
 
 jobs:
 - name: setup-ci

@@ -4,20 +4,27 @@ set -euxo pipefail
 
 : "${PROJECT_ID:?PROJECT_ID env var must be provided}"
 
-buckets="$(gsutil ls -p "${PROJECT_ID}")"
+matching_project="$(gcloud projects list --format json | jq '.[] | select(.projectId=="${PROJECT_ID)") | .projectId')"
 
-if [[ $buckets == *"${PROJECT_ID}"* ]]; then
-  echo "Existing bucket found for project ${PROJECT_ID}"
+if [[ $matching_project == *"${PROJECT_ID}"* ]]; then
+  buckets="$(gsutil ls -p "${PROJECT_ID}")"
 
-  if gsutil stat -q "gs://${PROJECT_ID}/terraform/terraform.tfstate"; then
-    gsutil cp "gs://${PROJECT_ID}/terraform/terraform.tfstate" terraform.tfstate
+  if [[ $buckets == *"${PROJECT_ID}"* ]]; then
+    echo "Existing bucket found for project ${PROJECT_ID}"
+
+    if gsutil stat -q "gs://${PROJECT_ID}/terraform/terraform.tfstate"; then
+      gsutil cp "gs://${PROJECT_ID}/terraform/terraform.tfstate" terraform.tfstate
+    else
+      echo "Error - project bucket exists, but terraform/terraform.tfstate does not"
+      exit 1
+    fi
   else
-    echo "Error - project bucket exists, but terraform/terraform.tfstate does not"
-    exit 1
+    echo "No existing bucket found for project ${PROJECT_ID}, assuming first run"
   fi
 else
-  echo "No existing bucket found for project ${PROJECT_ID}, assuming first run"
+  echo "No existing project ${PROJECT_ID}, assuming first run"
 fi
+
 
 pushd gcp-bootstrap/tf/ci
   terraform init

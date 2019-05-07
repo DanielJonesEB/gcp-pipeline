@@ -35,7 +35,7 @@ else
 fi
 
 
-pushd gcp-bootstrap/tf/ci
+pushd gcp-bootstrap/tf
   terraform init
 
   TF_VAR_billing_account_id="${BILLING_ACCOUNT_ID}" \

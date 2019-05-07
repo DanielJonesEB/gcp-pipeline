@@ -10,7 +10,7 @@ set -euxo pipefail
 : "${PROJECT_ID:?PROJECT_ID env var must be provided}"
 : "${PROJECT_NAME:?PROJECT_NAME env var must provide human-readable name of project to create}"
 
-pushd gcp-bootstrap/tf/ci
+pushd gcp-bootstrap/tf
   terraform init
 
   TF_VAR_billing_account_id="${BILLING_ACCOUNT_ID}" \

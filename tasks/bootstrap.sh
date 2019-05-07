@@ -6,7 +6,7 @@ set -euxo pipefail
 : "${PROJECT_ID:?PROJECT_ID env var must be provided}"
 
 echo "${GCP_CREDS_JSON}" > creds.json
-export GOOGLE_APPLICATION_CREDENTIALS=$PWD/creds.json
+gcloud auth activate-service-account --key-file creds.json
 
 matching_project="$(gcloud projects list --format json | jq '.[] | select(.projectId=="${PROJECT_ID)") | .projectId')"
 

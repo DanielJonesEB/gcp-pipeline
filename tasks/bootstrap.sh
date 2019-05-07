@@ -21,7 +21,7 @@ if [[ $matching_project == *"${PROJECT_ID}"* ]]; then
   if [[ $buckets == *"${PROJECT_ID}"* ]]; then
     echo "Existing bucket found for project ${PROJECT_ID}"
 
-    if gsutil stat -q "gs://${PROJECT_ID}/terraform/terraform.tfstate"; then
+    if gsutil -q stat "gs://${PROJECT_ID}/terraform/terraform.tfstate"; then
       gsutil cp "gs://${PROJECT_ID}/terraform/terraform.tfstate" terraform.tfstate
     else
       echo "Error - project bucket exists, but terraform/terraform.tfstate does not"

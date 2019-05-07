@@ -29,8 +29,7 @@ jobs:
     input_mapping:
       gcp-bootstrap: git
     params:
-      TF_VAR_gcp_creds: {{gcp_credentials_json}}
-      TF_VAR_project_id: {{project_id}}
+      GCP_CREDS_JSON: {{gcp_credentials_json}}
       PROJECT_ID: {{project_id}}
   - put: tfstate
     params:

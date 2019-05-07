@@ -14,5 +14,10 @@ run:
   path: gcp-bootstrap/tasks/teardown.sh
 
 params:
-  TF_VAR_gcp_creds:
-  TF_VAR_project_id:
+  BILLING_ACCOUNT_ID: {{billing_account_id}}
+  BUCKET_LOCATION: {{bucket_location}}
+  FOLDER_NAME: {{folder_name}}
+  GCP_CREDENTIALS_JSON: {{gcp_credentials_json}}
+  ORGANIZATION_ID: {{organization_id}}
+  PROJECT_ID: {{project_id}}
+  PROJECT_NAME: {{project_name}}

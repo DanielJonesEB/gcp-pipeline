@@ -8,7 +8,6 @@ image_resource:
 
 inputs:
 - name: gcp-bootstrap
-- name: tfstate
 outputs:
 - name: tfstate-out
 

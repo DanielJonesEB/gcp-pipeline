@@ -47,3 +47,5 @@ gcloud organizations add-iam-policy-binding "${ORG_ID}" \
 gcloud organizations add-iam-policy-binding "${ORG_ID}" \
   --member "serviceAccount:inception@${PROJECT_ID}.iam.gserviceaccount.com" \
   --role roles/resourcemanager.folderViewer
+
+echo Created folder "${FOLDER_NAME}", project "${PROJECT_ID}" and service account "inception@${PROJECT_ID}.iam.gserviceaccount.com"

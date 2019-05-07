@@ -14,5 +14,10 @@ run:
   path: gcp-bootstrap/tasks/bootstrap.sh
 
 params:
-  GCP_CREDS_JSON:
+  BILLING_ACCOUNT_ID:
+  BUCKET_LOCATION:
+  FOLDER_NAME:
+  GCP_CREDENTIALS_JSON:
+  ORGANIZATION_ID:
   PROJECT_ID:
+  PROJECT_NAME:

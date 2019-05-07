@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euxo pipefail
+set -euo pipefail
 
 : "${BILLING_ACCOUNT_ID:?BILLING_ACCOUNT_ID env var must specify the ID of the linked billing account}"
 : "${FOLDER_NAME:?FOLDER_NAME env var must specify which folder to place the inception project in}"

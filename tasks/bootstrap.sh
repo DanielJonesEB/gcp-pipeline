@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euxo pipefail
+set -euo pipefail
 
 : "${BILLING_ACCOUNT_ID:?BILLING_ACCOUNT_ID env var must be provided}"
 : "${BUCKET_LOCATION:?BUCKET_LOCATION env var must provide region of bucket to hold Terraform state (eg 'EU')}"

@@ -6,7 +6,7 @@ resource_types:
       repository: frodenas/gcs-resource
 
 resources:
-- name: git
+- name: concourse-gcp-tf-bootstrap
   type: git
   source:
     uri: https://github.com/DanielJonesEB/gcp-pipeline.git
@@ -21,12 +21,12 @@ resources:
 jobs:
 - name: setup-ci
   plan:
-  - get: git
+  - get: concourse-gcp-tf-bootstrap
     trigger: true
   - task: bootstrap-terraform
-    file: git/tasks/bootstrap.yml
+    file: concourse-gcp-tf-bootstrap/tasks/bootstrap.yml
     input_mapping:
-      gcp-bootstrap: git
+      gcp-bootstrap: concourse-gcp-tf-bootstrap
     params:
       BILLING_ACCOUNT_ID: {{billing_account_id}}
       BUCKET_LOCATION: {{bucket_location}}
@@ -41,14 +41,14 @@ jobs:
 
 - name: teardown-ci
   plan:
-  - get: git
+  - get: concourse-gcp-tf-bootstrap
     passed: [setup-ci]
   - get: tfstate
     passed: [setup-ci]
   - task: bootstrap-terraform
-    file: git/tasks/teardown.yml
+    file: concourse-gcp-tf-bootstrap/tasks/teardown.yml
     input_mapping:
-      gcp-bootstrap: git
+      gcp-bootstrap: concourse-gcp-tf-bootstrap
     params:
       BILLING_ACCOUNT_ID: {{billing_account_id}}
       BUCKET_LOCATION: {{bucket_location}}

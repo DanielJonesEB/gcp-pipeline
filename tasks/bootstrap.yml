@@ -6,12 +6,12 @@ image_resource:
     repository: engineerbetter/pcf-ops
 
 inputs:
-- name: gcp-bootstrap
+- name: concourse-gcp-tf-bootstrap
 outputs:
 - name: tfstate-out
 
 run:
-  path: gcp-bootstrap/tasks/bootstrap.sh
+  path: concourse-gcp-tf-bootstrap/tasks/bootstrap.sh
 
 params:
   BILLING_ACCOUNT_ID:

@@ -7,11 +7,11 @@ image_resource:
     tag: 0.11.13
 
 inputs:
-- name: gcp-bootstrap
+- name: concourse-gcp-tf-bootstrap
 - name: tfstate
 
 run:
-  path: gcp-bootstrap/tasks/teardown.sh
+  path: concourse-gcp-tf-bootstrap/tasks/teardown.sh
 
 params:
   BILLING_ACCOUNT_ID:

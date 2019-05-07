@@ -3,8 +3,7 @@ resource_types:
   - name: gcs-resource
     type: docker-image
     source:
-      repository: danieljoneseb/gcs-resource-with-default
-
+      repository: frodenas/gcs-resource
 
 resources:
 - name: git
@@ -25,7 +24,6 @@ jobs:
   plan:
   - get: git
     trigger: true
-  - get: tfstate
   - task: bootstrap-terraform
     file: git/tasks/bootstrap.yml
     input_mapping:
@@ -40,7 +38,9 @@ jobs:
 - name: teardown-ci
   plan:
   - get: git
+    passed: [setup-ci]
   - get: tfstate
+    passed: [setup-ci]
   - task: bootstrap-terraform
     file: git/tasks/teardown.yml
     input_mapping:
